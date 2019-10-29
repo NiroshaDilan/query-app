@@ -20,7 +20,7 @@ public class DiseasesData {
     @OneToOne(
             mappedBy = "diseasesData",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             optional = false)
     private Diseases diseases;
 

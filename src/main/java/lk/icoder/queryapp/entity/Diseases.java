@@ -18,11 +18,11 @@ public class Diseases {
     private Long hospitalId;
     private Long hospitalGroupId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "diseases_dataid")
     private DiseasesData diseasesData;
 

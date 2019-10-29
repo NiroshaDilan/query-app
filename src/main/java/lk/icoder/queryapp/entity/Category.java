@@ -20,14 +20,15 @@ public class Category {
     private String codeRange;
     private String category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "spcification_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "specification_id")
     private Specification specification;
 
     @OneToMany(
             mappedBy = "category",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
     private List<Diseases> diseases;
 

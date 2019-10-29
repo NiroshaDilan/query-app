@@ -24,7 +24,8 @@ public class Specification {
     @OneToMany(
             mappedBy = "specification",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
     private List<Category> categories;
 
