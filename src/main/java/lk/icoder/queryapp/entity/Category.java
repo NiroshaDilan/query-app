@@ -1,6 +1,10 @@
 package lk.icoder.queryapp.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,15 +24,17 @@ public class Category {
     private String codeRange;
     private String category;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "specification_id")
     private Specification specification;
 
+    @JsonManagedReference
     @OneToMany(
             mappedBy = "category",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Diseases> diseases;
 

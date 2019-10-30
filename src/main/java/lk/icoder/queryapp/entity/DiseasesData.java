@@ -1,5 +1,8 @@
 package lk.icoder.queryapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -17,12 +20,24 @@ public class DiseasesData {
     private Long hospitalId;
     private Long hospitalGroupId;
 
+    @Column(columnDefinition = "nclob")
+    private String diseasesData;
+
+    @JsonBackReference
     @OneToOne(
             mappedBy = "diseasesData",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             optional = false)
     private Diseases diseases;
+
+    public String getDiseasesData() {
+        return diseasesData;
+    }
+
+    public void setDiseasesData(String diseasesData) {
+        this.diseasesData = diseasesData;
+    }
 
     public Long getDiseasesDataid() {
         return diseasesDataid;

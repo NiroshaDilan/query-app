@@ -1,5 +1,7 @@
 package lk.icoder.queryapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,13 +23,21 @@ public class Specification {
     private String specification;
     private String specificationNo;
 
+    @JsonManagedReference
     @OneToMany(
             mappedBy = "specification",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Category> categories;
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
     public Long getSpecificationId() {
         return specificationId;
@@ -84,4 +94,6 @@ public class Specification {
     public void setSpecificationNo(String specificationNo) {
         this.specificationNo = specificationNo;
     }
+
+
 }

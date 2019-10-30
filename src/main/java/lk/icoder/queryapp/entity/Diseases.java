@@ -1,5 +1,11 @@
 package lk.icoder.queryapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 
 /**
@@ -18,11 +24,13 @@ public class Diseases {
     private Long hospitalId;
     private Long hospitalGroupId;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "diseases_dataid")
     private DiseasesData diseasesData;
 
